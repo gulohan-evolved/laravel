@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::post('/gulohan', 'gulohan_controller@getUser');
