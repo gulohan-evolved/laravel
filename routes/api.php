@@ -15,3 +15,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/getusers/', 'gulohan_controller@getUsers');
 Route::post('/adduser/', 'gulohan_controller@addUser');
 Route::patch('/updateuser/', 'gulohan_controller@updateUser');
+Route::post('/registeruser/','gulohan_controller@registerUser');
+Route::post('/autouser/', 'gulohan_controller@autoUser');
