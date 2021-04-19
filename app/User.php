@@ -16,5 +16,4 @@ class User extends Authenticatable
     [
         'fool', 'big_smoke'
     ];
-
 }
