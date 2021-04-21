@@ -22,3 +22,6 @@ Route::post('/logoutuser/', 'gulohan_controller@logoutUser');
 Route::get('/getproduct/','product_controller@getProduct');
 Route::post('/addproduct/','product_controller@addProduct');
 Route::delete('/deleteproduct/','product_controller@deleteProduct');
+
+Route::post('/regreserv/','reserv_controller@regReserv');
+

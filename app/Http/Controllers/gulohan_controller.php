@@ -21,8 +21,9 @@ class gulohan_controller extends Controller
 	{
 		$user = new User();
 
-		$user->fool = $req->fool;
-		$user->big_smoke = $req->big_smoke;
+		$user->name = $req->name;
+		$user->last_name = $req->last_name;
+		$user->password = $req->password;
 
 		$u = $user->save();
 
@@ -36,8 +37,9 @@ class gulohan_controller extends Controller
 	{
 		$user = User::where("id", $req->id)->first();
 			
-		$user->fool =$req->fool;
-		$user->big_smoke =$req->big_smoke;
+		$user->name = $req->name;
+		$user->last_name = $req->last_name;
+		$user->password = $req->password;
 
 		$user->save();
 
@@ -47,8 +49,9 @@ class gulohan_controller extends Controller
 	public function registerUser(Request $req)
 	{
 		$validator = Validator::make($req->all(),[
-			'fool'=>'required|unique:gul',
-			'big_smoke'=>'required',
+			'name'=>'required|unique:gul',
+			'last_name'=>'required',
+			'password'=>'required',
 		]);
 
 		if ($validator->fails())
@@ -56,25 +59,24 @@ class gulohan_controller extends Controller
 
 		$user=User::create($req->all());
 		return response()->json('Вы успешно зарегестрировались');
-
-
 	}
 
 	public function signinUser(Request $req)
 	{
 		$validator = Validator::make($req->all(),[
-			'fool'=>'required|exists:gul,fool',
-			'big_smoke'=>'required|exists:gul,big_smoke',
+			'name'=>'required|exists:gul,name',
+			'last_name'=>'required|exists:gul,last_name',
+			'password'=>'required|exists:gul,password',
 		]);
 
 		if ($validator->fails())
 		{
-			return response()->json('Фул или Большой Дым введены неверно');
+			return response()->json('Что-то точно введено неверно');
 			return response()->json($validator->errors());
 		}
 
-		$user=User::where("fool",$req->fool)->first();
-		if ($req->big_smoke==$user->big_smoke)	
+		$user=User::where("name",$req->name)->first();
+		if ($req->password==$user->password)	
 		$user->api_token=Str::random(15);
 		$user->save();
 		return response()->json('Авторизация прошла успешно');
@@ -84,10 +86,12 @@ class gulohan_controller extends Controller
 	{
 		$user=User::where("api_token",$req->api_token)->first();
 
-		if ($user && $req->api_token!=null){
-					$user->api_token=null;
-					$user->save();
-					return response()->json('Вы успешно разлогинились');}
+		if ($user && $req->api_token != null)
+		{
+			$user->api_token=null;
+			$user->save();
+			return response()->json('Вы успешно разлогинились');
+		}
 
 		return "Авторизуйтесь, чтобы разлогиниться";
 	}
