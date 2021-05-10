@@ -24,4 +24,5 @@ Route::post('/addproduct/','product_controller@addProduct');
 Route::delete('/deleteproduct/','product_controller@deleteProduct');
 
 Route::post('/regreserv/','reserv_controller@regReserv');
+Route::post('/deletereserv/','reserv_controller@deleteReserv');
 

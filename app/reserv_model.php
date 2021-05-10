@@ -12,6 +12,6 @@ class reserv_model extends Model
 
     protected $fillable =
     [
-        'id_ticket->', 'id_ticket<-', 'data->', 'data<-', 'id_user'
+        'ticket_there', 'return_ticket', 'date_there', 'date_back', 'id_user', 'code_reserv'
     ];
 }
